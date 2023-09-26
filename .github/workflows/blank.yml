@@ -1,0 +1,26 @@
+name: Build and Deploy Website
+
+on:
+  push:
+    branches:
+      - main # Trigger the workflow when changes are pushed to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2 # This action checks out your repository's code
+
+      - name: Build Website
+        run: |
+          # Replace these commands with your actual build commands
+          npm install
+          npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build # Replace with your build output directory
